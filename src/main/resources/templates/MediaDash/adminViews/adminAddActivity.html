@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar and Sidebar Example</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/navStyle.css}"/>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <!-- Sidebar content goes here -->
+            <ul class="nav flex-column">
+                <li class ="nav-item">
+                    <h2 class="nav-header">Media Controller</h2>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminAssignment">Active Assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminCources">Cources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminSch">My Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminGrades">Grades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminAccount">My Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminUpdateClass">Edit your Classes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminSignUpPage">Sign Up Here</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminAddStudent">Add a Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminSubmitAssignment">submit your assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminGradeAssignment">grade assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/LogOut">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 ">
+            <h1 class="main-header-style">Update your class activity</h1>
+            <form th:action="@{/adminAddActivity}" th:object="${courceAssignmentEntity}" method="post" class="form-create-activity-class">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Name of activity</label>
+                    <input type="text" class="form-control" th:field="*{assignmentName}" id="exampleFormControlInput1" placeholder="Your Assignment">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput2">Due date if there is one</label>
+                    <input type="text" class="form-control" th:field="*{assignmentdueDate}" id="exampleFormControlInput2" placeholder="00/00/0000">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput3">Link if needed</label>
+                    <input type="text" class="form-control" th:field="*{assignmentLink}" id="exampleFormControlInput3" placeholder="your link">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect4">Type of Assignment</label>
+                    <select class="form-control" id="exampleFormControlSelect4" th:field="*{assignmentType}">
+                        <option value="">Select your the type of assignment you want</option>
+                        <option value="quiz">quiz - any format of quiz or bulit in quiz maker</option>
+                        <option value="homework">homework - allows for docs and submission to be made</option>
+                        <option value="docs">Documents - allows you to link documents no submission</option>
+                        <option value="textfield">Textfeild - this will display text in the week selected</option>
+                        <option value="link">link to something</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect6">Please choice your Class</label>
+                    <select class="form-control" th:field="*{CourceID}" id="exampleFormControlSelect6">
+                        <option value="">Select the class you want</option>
+                        <option th:each="AllCource : ${AllCource}" th:value="${AllCource.id}" th:text="${AllCource.class_names}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect7">Please choice your Class</label>
+                    <select class="form-control" th:field="*{category}" id="exampleFormControlSelect7">
+                        <option value="">Select the category you want</option>
+                        <option th:each="AllCat : ${AllCat}" th:value="${AllCat.Catogory}" th:text="${AllCat.Catogory + ' - ' + AllCat.CourceID}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea7">Description or instructions</label>
+                    <textarea class="form-control" th:field="*{assignmentDescription}" id="exampleFormControlTextarea7" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+            </form>
+            <div class="container center-class">
+                <div class="row">
+                    <div class="col-md">
+                        <a href="/adminUpdateClass" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Class</a>
+                    </div>
+                    <div class="col-md">
+                        <a href="/adminAddCategory" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Category</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional, for dropdowns, toggles, etc.) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
